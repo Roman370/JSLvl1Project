@@ -2,11 +2,18 @@ const http = require('http')
 const fs = require('fs')
 
 const server = http.createServer((req, res) => {
-    const body = req.url === '/style.css'
-        ? fs.readFileSync('public/style.css')
-        : fs.readFileSync('public/index.html')
+    const pablicPath = './public'
+    let body = null
+    try {
+        body = fs.readFileSync(`${pablicPath}${req.url}`)
+    } catch (e) {
+        console.log(e)
+        body = fs.readFileSync(`${pablicPath}/index.html`)
+    }
     res.end(body)
 })
 
-server.listen(3000)
-console.log('Server started')
+const port = process.env.PORT || 3000
+
+server.listen(port)
+console.log(`Server started on port ${port}`)
