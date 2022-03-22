@@ -1,0 +1,34 @@
+{
+    "data": [
+        {
+            "name": "Туфли женские",
+            "price": 300,
+            "img": "img/tufli_jen.png"
+        },
+        {
+            "name": "Футболка",
+            "price": 200,
+            "img": "img/footb_2.png"
+        },
+        {
+            "name": "Туфли мужские",
+            "price": 250,
+            "img": "img/tufli.png"
+        },
+        {
+            "name": "Футболка Levis",
+            "price": 350,
+            "img": "img/footbol_3.png"
+        },
+        {
+            "name": "Сумка женская",
+            "price": 200,
+            "img": "img/sumka.png"
+        },
+        {
+            "name": "Шорты мужские",
+            "price": 270,
+            "img": "img/shorty.png"
+        }
+    ]
+}

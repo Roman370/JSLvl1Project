@@ -1,3 +1,4 @@
+
 class GoodItem {
 
     name = ''
@@ -149,7 +150,48 @@ class List {
 
     constructor(items = []) {
         this.items = items
+
     }
+
+    fetchGoods() {
+        const rezult = fetch('http://localhost:3000/database.json')
+        console.log(rezult)
+        return rezult
+            .then(res => {
+                return res.json()
+            })
+            .then(data => {
+                console.log(data)
+                this.items = data.data.map(cur => {
+                    console.log(cur)
+                    return new GoodItem(cur.name, cur.price, cur.img)
+                })
+                console.log(this.items)
+
+            })
+
+    }
+
+    fetchGoods2() {
+        const rezult = fetch('http://localhost:3000/database2.json')
+        console.log(rezult)
+        return rezult
+            .then(res => {
+                return res.json()
+            })
+            .then(data => {
+                console.log(data)
+                this.items = data.data.map(cur => {
+                    console.log(cur)
+                    return new GoodItem(cur.name, cur.price, cur.img)
+                })
+                console.log(this.items)
+
+            })
+
+    }
+
+
 
     findGood(good) {
         return this.items.filter(item => item.name === good.name)[0]
@@ -331,15 +373,38 @@ class Cart extends List {
 
 class GoodList extends List {
 
-
-
     constructor(items) {
         super(items)
+        let goodsPromise = this.fetchGoods()
+        goodsPromise.then(() => {
+            this.render()
+        })
+
+    }
+
+
+
+    btnOnList() {
+        const btnOnload = document.createElement('div')
+        btnOnload.classList.add('btn_onload')
+        btnOnload.innerHTML = 'Загрузить ещё'
+
+        btnOnload.addEventListener('click', () => {
+            let goodsPromise = this.fetchGoods2()
+            goodsPromise.then(() => {
+                console.log(this.items)
+                this.renderOnload()
+            })
+        })
+
+        return btnOnload
     }
 
     render() {
 
         const PlaceToRender = document.querySelector('.product__wrapp')
+
+
 
         if (!PlaceToRender) {
             return
@@ -353,20 +418,47 @@ class GoodList extends List {
 
         })
 
+        PlaceToRender.appendChild(this.btnOnList())
+
+
     }
+
+
+    renderOnload() {
+
+        const PlaceToRender = document.querySelector('.product__wrapp')
+
+
+        if (!PlaceToRender) {
+            return
+
+        }
+
+        this.items.forEach(item => {
+            const template = item.getMainTemplate()
+            PlaceToRender.appendChild(template)
+
+        })
+    }
+
+
 }
 
+/*
 const good1 = new GoodItem('Туфли женские', 300, 'img/tufli_jen.png')
 const good2 = new GoodItem('Футболка', 200, 'img/footb_2.png')
 const good3 = new GoodItem('Туфли мужские', 250, 'img/tufli.png')
 const good4 = new GoodItem('Футболка Levis', 350, 'img/footbol_3.png')
 const good5 = new GoodItem('Сумка женская', 200, 'img/sumka.png')
-const good6 = new GoodItem('Шорты мужские', 270, 'img/shorty.png')
+const good6 = new GoodItem('Шорты мужские', 270, 'img/shorty.png')*/
 
-
-const goodListInstance = new GoodList()
+/*
+const goodListInstance = new GoodList()*/
 const cartInstance = new Cart()
+const goodListInstance = new GoodList()
 
+
+/*
 goodListInstance.add(good1)
 goodListInstance.add(good2)
 goodListInstance.add(good3)
@@ -375,8 +467,10 @@ goodListInstance.add(good5)
 goodListInstance.add(good6)
 
 
-goodListInstance.render()
+goodListInstance.render()*/
 
+
+/*Кнопка бургер, для моб.версии */
 const navButton = document.querySelector('.nav_button')
 const headerNav = document.querySelector('.header__nav')
 const body = document.querySelector('body')
@@ -386,6 +480,9 @@ navButton.addEventListener('click', () => {
     body.classList.toggle('overflow')
 
 })
+
+
+
 
 
 

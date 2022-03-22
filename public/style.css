@@ -110,6 +110,7 @@
     background-color: #000000;
     top             : 54px;
     right           : -10px;
+    z-index         : 5;
 }
 
 .cart__empty.shown {
@@ -275,9 +276,11 @@
     justify-content: center;
     align-items    : center;
     gap            : 50px 20px;
-    flex-wrap      : wrap;
-    max-width      : 1000px;
-    padding        : 50px 0;
+
+    flex-wrap: wrap;
+    max-width: 1000px;
+    padding  : 50px 0;
+    position : relative;
 }
 
 .product__item {
@@ -339,6 +342,14 @@
     background-color: #00000086;
 }
 
+.btn_onload {
+    flex-basis   : 100%;
+    text-align   : center;
+    cursor       : pointer;
+    position     : absolute;
+    bottom       : 0;
+    margin-bottom: 10px;
+}
 
 /*========================*/
 

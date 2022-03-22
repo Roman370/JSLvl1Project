@@ -1,0 +1,14 @@
+{
+    "data": [
+        {
+            "name": "Туфли женские-2",
+            "price": 300,
+            "img": "img/tufli_jen.png"
+        },
+        {
+            "name": "Футболка-2",
+            "price": 200,
+            "img": "img/footb_2.png"
+        }
+    ]
+}
